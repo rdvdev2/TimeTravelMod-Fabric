@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NNN",
+    "NIN",
+    "NNN"],
+  "key": {
+    "I": [
+      {
+        "item": "minecraft:iron_ingot"
+      }
+    ],
+    "N": [
+      {
+        "item": "minecraft:iron_nugget"
+      }
+    ]
+  },
+  "result": {
+    "item": "timetravelmod:heavyingot",
+    "count": 1
+  }
+}

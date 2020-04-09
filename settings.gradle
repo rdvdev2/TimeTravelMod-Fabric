@@ -1,0 +1,14 @@
+pluginManagement {
+    repositories {
+        jcenter()
+        maven {
+            name = 'Fabric'
+            url = 'https://maven.fabricmc.net/'
+        }
+        maven {
+            name = "CurseForge"
+            url = "https://minecraft.curseforge.com/api/maven/"
+        }
+        gradlePluginPortal()
+    }
+}

@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "package": "com.rdvdev2.TimeTravelMod.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "IBiomeSourceType",
+    "ICriterions",
+    "IDamageSource",
+    "MixinOverworldDimension",
+    "MixinPlayerManager"
+  ],
+  "client": [
+    "client.MixinSoundManager"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

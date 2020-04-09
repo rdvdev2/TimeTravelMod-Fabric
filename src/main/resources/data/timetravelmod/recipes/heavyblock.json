@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "HHH",
+    "HHH",
+    "HHH" ],
+  "key": {
+    "H": [
+      {
+        "item": "timetravelmod:heavyingot"
+      }
+    ]
+  },
+  "result": {
+    "item": "timetravelmod:heavyblock",
+    "count": 1
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "timetravelmod",
+  "version": "${version}",
+  "name": "Time Travel Mod",
+  "description": "Ever wanted to travel through time in Minecraft? Build your own time travel machine and discover a bunch of new worlds, objects and mobs!",
+  "authors": [
+    "rdvdev2"
+  ],
+  "contact": {
+    "email": "rdvdev2@gmail.com",
+    "homepage": "https://minecraft.curseforge.com/projects/time-travel-mod",
+    "issues": "https://github.com/rdvdev2/TimeTravelMod-Fabric/issues",
+    "sources": "https://github.com/rdvdev2/TimeTravelMod"
+  },
+  "license": "GPL-3.0-only",
+  "icon": "assets/timetravelmod/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.rdvdev2.TimeTravelMod.Mod"
+    ],
+    "client": [
+      "com.rdvdev2.TimeTravelMod.ModClient"
+    ],
+    "modmenu": [
+      "com.rdvdev2.TimeTravelMod.integration.ModMenuIntegration"
+    ]
+  },
+  "mixins": [
+    "timetravelmod.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": "*",
+    "fabric": "*",
+    "minecraft": "1.15.2"
+  },
+  "custom": {
+    "timetravelmod_updateurl": "https://raw.githubusercontent.com/rdvdev2/TimeTravelMod-Fabric/1.15.2/updates.csv"
+  }
+}

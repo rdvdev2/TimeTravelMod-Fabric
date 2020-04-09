@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "I I",
+    "ICI",
+    "III" ],
+  "key": {
+    "I": [
+      {
+        "item": "minecraft:iron_ingot"
+      }
+    ],
+    "C": {
+      "item": "timetravelmod:controllercircuit"
+    }
+  },
+  "result": {
+    "item": "timetravelmod:temporalcauldron",
+    "count": 1
+  }
+}
