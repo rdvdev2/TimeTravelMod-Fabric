@@ -3,9 +3,10 @@ package com.rdvdev2.TimeTravelMod.common.block.blockentity;
 import com.rdvdev2.TimeTravelMod.ModBlocks;
 import com.rdvdev2.TimeTravelMod.ModItems;
 import com.rdvdev2.TimeTravelMod.common.block.TemporalCauldronBlock;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.inventory.BasicInventory;
 import net.minecraft.inventory.Inventory;
+import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -15,7 +16,7 @@ import java.util.Random;
 
 public class TemporalCauldronTileEntity extends BlockEntity implements Tickable {
 
-    private Inventory inventory = new BasicInventory(2) {
+    private Inventory inventory = new SimpleInventory(2) {
         @Override
         public void markDirty() {
             super.markDirty();
@@ -34,24 +35,24 @@ public class TemporalCauldronTileEntity extends BlockEntity implements Tickable 
     }
 
     public boolean containsItem() {
-        return !inventory.getInvStack(ITEM_SLOT).isEmpty();
+        return !inventory.getStack(ITEM_SLOT).isEmpty();
     }
 
     public void putItem(ItemStack item) {
-        if (item.isDamageable()); inventory.setInvStack(ITEM_SLOT, item);
+        if (item.isDamageable()); inventory.setStack(ITEM_SLOT, item);
     }
 
     public ItemStack removeItem() {
-        return inventory.takeInvStack(ITEM_SLOT, 1);
+        return inventory.removeStack(ITEM_SLOT, 1);
     }
 
     public boolean containsCrystal() {
-        return !inventory.getInvStack(CRYSTAL_SLOT).isEmpty();
+        return !inventory.getStack(CRYSTAL_SLOT).isEmpty();
     }
 
     public void putCrystal(ItemStack item) {
         if (item.getItem() == ModItems.TIME_CRYSTAL) {
-            inventory.setInvStack(CRYSTAL_SLOT, item);
+            inventory.setStack(CRYSTAL_SLOT, item);
             crystal_usages = 2000;
             this.world.setBlockState(this.pos, this.world.getBlockState(pos).with(TemporalCauldronBlock.LEVEL, 3));
         }
@@ -62,8 +63,8 @@ public class TemporalCauldronTileEntity extends BlockEntity implements Tickable 
         super.toTag(tag);
     
         ListTag inventoryTag = new ListTag();
-        for (int slot = 0; slot < inventory.getInvSize(); slot++) {
-            inventoryTag.add(slot, inventory.getInvStack(slot).toTag(new CompoundTag()));
+        for (int slot = 0; slot < inventory.size(); slot++) {
+            inventoryTag.add(slot, inventory.getStack(slot).toTag(new CompoundTag()));
         }
         tag.put("inventory", inventoryTag);
         
@@ -74,13 +75,13 @@ public class TemporalCauldronTileEntity extends BlockEntity implements Tickable 
     }
     
     @Override
-    public void fromTag(CompoundTag tag) {
-        super.fromTag(tag);
+    public void fromTag(BlockState state, CompoundTag tag) {
+        super.fromTag(state, tag);
         
         ListTag inventoryTag = (ListTag) tag.get("inventory");
         if (inventoryTag != null) {
-            for (int slot = 0; slot < inventory.getInvSize(); slot++) {
-                inventory.setInvStack(slot, ItemStack.fromTag(inventoryTag.getCompound(slot)));
+            for (int slot = 0; slot < inventory.size(); slot++) {
+                inventory.setStack(slot, ItemStack.fromTag(inventoryTag.getCompound(slot)));
             }
             crystal_usages = tag.getInt("crystal_usages");
             tick_count = tag.getInt("tick_count");
@@ -90,12 +91,12 @@ public class TemporalCauldronTileEntity extends BlockEntity implements Tickable 
     @Override
     public void tick() {
         if (world.isClient) return;
-        if (!inventory.getInvStack(ITEM_SLOT).isEmpty() && !inventory.getInvStack(CRYSTAL_SLOT).isEmpty()) {
+        if (!inventory.getStack(ITEM_SLOT).isEmpty() && !inventory.getStack(CRYSTAL_SLOT).isEmpty()) {
             if (crystal_usages == 1300) this.world.setBlockState(this.pos, this.world.getBlockState(pos).with(TemporalCauldronBlock.LEVEL, 2));
             if (crystal_usages == 600) this.world.setBlockState(this.pos, this.world.getBlockState(pos).with(TemporalCauldronBlock.LEVEL, 1));
             if (crystal_usages == 0) {
                 this.world.setBlockState(this.pos, this.world.getBlockState(pos).with(TemporalCauldronBlock.LEVEL, 0));
-                inventory.takeInvStack(CRYSTAL_SLOT, 1);
+                inventory.removeStack(CRYSTAL_SLOT, 1);
             }
 
             tick_count++;
@@ -103,7 +104,7 @@ public class TemporalCauldronTileEntity extends BlockEntity implements Tickable 
                 tick_count = 0;
                 crystal_usages--;
 
-                ItemStack tool = inventory.takeInvStack(ITEM_SLOT, 1);
+                ItemStack tool = inventory.removeStack(ITEM_SLOT, 1);
                 int damage = tool.getDamage();
                 Random r = new Random();
 
@@ -112,7 +113,7 @@ public class TemporalCauldronTileEntity extends BlockEntity implements Tickable 
                 else if (n < 95) damage--;
 
                 tool.setDamage(damage);
-                inventory.setInvStack(ITEM_SLOT, tool);
+                inventory.setStack(ITEM_SLOT, tool);
             }
 
             markDirty();

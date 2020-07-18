@@ -34,7 +34,7 @@ public class TrackerHooks {
                             if (tile instanceof TimeMachineRecallerBlockEntity) {
                                 ((TimeMachineRecallerBlockEntity) tile).setControllerPos(controllerPos);
                                 ((TimeMachineRecallerBlockEntity) tile).setSide(side);
-                                ((TimeMachineRecallerBlockEntity) tile).setDest(worldIn.getDimension().getType());
+                                ((TimeMachineRecallerBlockEntity) tile).setDest(worldIn.getRegistryKey());
                             }
                         }
                     }

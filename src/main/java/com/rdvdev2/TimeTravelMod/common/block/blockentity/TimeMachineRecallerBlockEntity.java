@@ -1,19 +1,21 @@
 package com.rdvdev2.TimeTravelMod.common.block.blockentity;
 
 import com.rdvdev2.TimeTravelMod.ModBlocks;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.dimension.DimensionType;
+import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.world.World;
 
 public class TimeMachineRecallerBlockEntity extends BlockEntity {
 
     private BlockPos controllerPos;
     private Direction side;
-    private DimensionType dest;
+    private RegistryKey<World> dest;
 
     public TimeMachineRecallerBlockEntity() {
         super(ModBlocks.TileEntities.TM_RECALLER);
@@ -37,11 +39,11 @@ public class TimeMachineRecallerBlockEntity extends BlockEntity {
         markDirty();
     }
 
-    public DimensionType getDest() {
+    public RegistryKey<World> getDest() {
         return dest;
     }
 
-    public void setDest(DimensionType dest) {
+    public void setDest(RegistryKey<World> dest) {
         this.dest = dest;
         markDirty();
     }
@@ -52,18 +54,18 @@ public class TimeMachineRecallerBlockEntity extends BlockEntity {
         if (this.controllerPos != null) {
             tag.putLong("controllerpos", this.controllerPos.asLong());
             tag.putInt("side", this.side.getId());
-            tag.putString("dest", Registry.DIMENSION_TYPE.getId(this.dest).toString());
+            tag.putString("dest", this.dest.getValue().toString());
         }
         return tag;
     }
     
     @Override
-    public void fromTag(CompoundTag tag) {
-        super.fromTag(tag);
+    public void fromTag(BlockState state, CompoundTag tag) {
+        super.fromTag(state, tag);
         if (tag.contains("controllerpos")) {
             this.controllerPos = BlockPos.fromLong(tag.getLong("controllerpos"));
             this.side = Direction.byId(tag.getInt("side"));
-            this.dest = DimensionType.byId(Identifier.tryParse(tag.getString("dest")));
+            this.dest = RegistryKey.of(Registry.DIMENSION, Identifier.tryParse(tag.getString("dest")));
         }
     }
 }

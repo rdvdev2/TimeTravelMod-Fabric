@@ -2,7 +2,7 @@ package com.rdvdev2.TimeTravelMod.client;
 
 import com.rdvdev2.TimeTravelMod.ModConfig;
 import com.rdvdev2.TimeTravelMod.ModSounds;
-import com.rdvdev2.TimeTravelMod.common.world.dimension.oldwest.OldWestDimension;
+import com.rdvdev2.TimeTravelMod.ModTimeLines;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
@@ -21,7 +21,7 @@ public class MusicManager {
         if (ModConfig.getInstance().getClient().getEnableTimeLineMusic()) {
             if (originalSound != null &&
                     MinecraftClient.getInstance().player != null &&
-                    MinecraftClient.getInstance().player.world.getDimension() instanceof OldWestDimension &&
+                    MinecraftClient.getInstance().player.world.getRegistryKey() == ModTimeLines.OLDWEST.getWorldKey() &&
                     originalSound.getCategory() == SoundCategory.MUSIC) {
                 if (MinecraftClient.getInstance().getSoundManager().isPlaying(OLDWEST_MUSIC)) {
                     return Optional.empty();

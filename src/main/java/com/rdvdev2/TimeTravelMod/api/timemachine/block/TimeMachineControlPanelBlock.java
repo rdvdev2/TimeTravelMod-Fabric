@@ -49,7 +49,7 @@ public class TimeMachineControlPanelBlock extends Block {
                 return ActionResult.SUCCESS;
             } catch (IncompatibleTimeMachineHooksException e) {
                 TranslatableText message = new TranslatableText("timetravelmod.error.uncompatible_upgrades", TimeMachineUtils.concatUncompatibilities(Lists.newArrayList(e.getIncompatibilities())));
-                player.addChatMessage(message, false);
+                player.sendMessage(message, false);
                 return ActionResult.FAIL;
             }
         } else return ActionResult.FAIL;

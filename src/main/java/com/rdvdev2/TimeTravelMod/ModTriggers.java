@@ -1,7 +1,7 @@
 package com.rdvdev2.TimeTravelMod;
 
 import com.rdvdev2.TimeTravelMod.common.triggers.CustomTrigger;
-import com.rdvdev2.TimeTravelMod.mixin.ICriterions;
+import com.rdvdev2.TimeTravelMod.mixin.ICriteria;
 import net.minecraft.util.Identifier;
 
 import static com.rdvdev2.TimeTravelMod.Mod.MODID;
@@ -18,6 +18,6 @@ public class ModTriggers {
     };
 
     public static void register() {
-        for (CustomTrigger trigger : TRIGGERS) ICriterions.doRegister(trigger);
+        for (CustomTrigger trigger : TRIGGERS) ICriteria.doRegister(trigger);
     }
 }

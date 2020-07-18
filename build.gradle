@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '0.2.6-SNAPSHOT'
+    id 'fabric-loom' version '0.4-SNAPSHOT'
     id 'maven-publish'
 }
 
@@ -15,16 +15,16 @@ minecraft {
 }
 
 dependencies {
-    minecraft "com.mojang:minecraft:1.15.2"
-    mappings "net.fabricmc:yarn:1.15.2+build.15:v2"
-    modCompile "net.fabricmc:fabric-loader:0.7.10+build.191"
+    minecraft "com.mojang:minecraft:1.16.1"
+    mappings "net.fabricmc:yarn:1.16.1+build.21:v2"
+    modImplementation "net.fabricmc:fabric-loader:0.8.8+build.202"
 
-    modCompile "net.fabricmc.fabric-api:fabric-api:0.5.1+build.294-1.15"
-    modImplementation "me.shedaniel.cloth:config-2:2.13.2"
-    include "me.shedaniel.cloth:config-2:2.13.2"
-    modImplementation "me.sargunvohra.mcmods:autoconfig1u:2.0"
-    include "me.sargunvohra.mcmods:autoconfig1u:2.0"
-    modImplementation "io.github.prospector:modmenu:1.10.2+build.32"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:0.15.0+build.379-1.16.1"
+    modImplementation "me.shedaniel.cloth:config-2:4.6.0"
+    include "me.shedaniel.cloth:config-2:4.6.0"
+    modImplementation "me.sargunvohra.mcmods:autoconfig1u:3.2.0-unstable"
+    include "me.sargunvohra.mcmods:autoconfig1u:3.2.0-unstable"
+    modImplementation "io.github.prospector:modmenu:1.14.5+build.30"
 
     implementation 'org.jetbrains:annotations:15.0'
 }

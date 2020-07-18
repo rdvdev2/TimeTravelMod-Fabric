@@ -3,7 +3,6 @@ package com.rdvdev2.TimeTravelMod.common.networking;
 import com.rdvdev2.TimeTravelMod.Mod;
 import com.rdvdev2.TimeTravelMod.ModRegistries;
 import com.rdvdev2.TimeTravelMod.ModTimeLines;
-import com.rdvdev2.TimeTravelMod.api.dimension.AbstractTimeLineDimension;
 import com.rdvdev2.TimeTravelMod.api.dimension.TimeLine;
 import com.rdvdev2.TimeTravelMod.api.timemachine.TimeMachine;
 import com.rdvdev2.TimeTravelMod.api.timemachine.exception.IncompatibleTimeMachineHooksException;
@@ -13,15 +12,14 @@ import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.dimension.v1.FabricDimensions;
 import net.fabricmc.fabric.api.network.PacketContext;
 import net.minecraft.entity.Entity;
-import net.minecraft.network.MessageType;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.PacketByteBuf;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.dimension.DimensionType;
+import net.minecraft.world.World;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -79,7 +77,7 @@ public class DimensionTpPKT {
     public static void handle(DimensionTpPKT pkt, PacketContext ctx) {
         ctx.getTaskQueue().execute(() -> {
             ServerPlayerEntity serverPlayer = (ServerPlayerEntity) ctx.getPlayer();
-            DimensionType dim = pkt.tl.getDimensionType();
+            ServerWorld destWorld = serverPlayer.server.getWorld(pkt.tl.getWorldKey());
             BlockPos pos = pkt.pos;
             Direction side = pkt.side;
             ServerWorld origin = serverPlayer.getServerWorld();
@@ -100,32 +98,32 @@ public class DimensionTpPKT {
                     serverPlayer.world.isChunkLoaded(pos) &&
                     TimeMachineUtils.serverCheck(serverPlayer.server, tm, serverPlayer.world, serverPlayer, pos, side)) {
                 if (tm.getTier() >= pkt.tl.getMinTier()) {
-                    applyCorruption(tm, serverPlayer.dimension, dim, serverPlayer.server);
-                    FabricDimensions.teleport(serverPlayer, dim, new TimeMachineEntityPlacer(tm, origin , pos, side, true));
+                    applyCorruption(tm, serverPlayer.getServerWorld(), destWorld, serverPlayer.server);
+                    FabricDimensions.teleport(serverPlayer, destWorld, new TimeMachineEntityPlacer(tm, origin , pos, side, true));
                     pkt.additionalEntities.stream()
                             .map(origin::getEntity)
                             .filter(Objects::nonNull)
-                            .forEach(entity -> FabricDimensions.teleport(entity, dim, new TimeMachineEntityPlacer(tm, origin, pos, side, false)));
+                            .forEach(entity -> FabricDimensions.teleport(entity, destWorld, new TimeMachineEntityPlacer(tm, origin, pos, side, false)));
                 } else {
                     Arrays.stream(serverPlayer.server.getPlayerManager().getOpList().getNames())
                             .map(op -> serverPlayer.server.getPlayerManager().getPlayer(op))
                             .forEach(op -> {
                                 if (op != null)
-                                    op.sendChatMessage(TimeMachineUtils.Check.UNREACHABLE_DIM.getCheaterReport(serverPlayer), MessageType.CHAT);
+                                    op.sendMessage(TimeMachineUtils.Check.UNREACHABLE_DIM.getCheaterReport(serverPlayer), false);
                             });
                 }
             } else {
                 if (!entitiesFlag.get()) {
-                    serverPlayer.sendChatMessage(TimeMachineUtils.Check.ENTITIES_ESCAPED.getClientError(), MessageType.GAME_INFO);
+                    serverPlayer.sendMessage(TimeMachineUtils.Check.ENTITIES_ESCAPED.getClientError(), true);
                 }
                 Mod.LOGGER.error("Time Travel canceled due to incorrect conditions");
             }
         });
     }
 
-    public static void applyCorruption(TimeMachine tm, DimensionType origDim, DimensionType destDim, MinecraftServer server) {
-        TimeLine origTimeLine = origDim == DimensionType.OVERWORLD ? ModTimeLines.PRESENT : ((AbstractTimeLineDimension) server.getWorld(origDim).dimension).getTimeLine();
-        TimeLine destTimeLine = destDim == DimensionType.OVERWORLD ? ModTimeLines.PRESENT : ((AbstractTimeLineDimension) server.getWorld(destDim).dimension).getTimeLine();
+    public static void applyCorruption(TimeMachine tm, ServerWorld origWorld, ServerWorld destWorld, MinecraftServer server) {
+        TimeLine origTimeLine = origWorld.getRegistryKey() == World.OVERWORLD ? ModTimeLines.PRESENT : ModRegistries.TIME_LINES.get(origWorld.getRegistryKey().getValue());
+        TimeLine destTimeLine = destWorld.getRegistryKey() == World.OVERWORLD ? ModTimeLines.PRESENT : ModRegistries.TIME_LINES.get(destWorld.getRegistryKey().getValue());
         int origTier = origTimeLine.getMinTier();
         int destTier = destTimeLine.getMinTier();
         

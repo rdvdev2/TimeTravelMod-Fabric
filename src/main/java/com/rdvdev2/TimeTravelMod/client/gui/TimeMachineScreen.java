@@ -11,7 +11,7 @@ import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.client.resource.language.I18n;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.TranslatableText;
@@ -57,9 +57,9 @@ public class TimeMachineScreen extends Screen {
     }
 
     @Override
-    public void render(int mouseX, int mouseY, float partialTicks) {
-        this.renderBackground();
-        super.render(mouseX, mouseY, partialTicks);
+    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
+        this.renderBackground(matrices);
+        super.render(matrices, mouseX, mouseY, delta);
     }
 
     @Override
@@ -74,7 +74,7 @@ public class TimeMachineScreen extends Screen {
         TimeMachineScreen screen;
 
         TimeLineButton(int x, int y, TimeLine tl, TimeMachineScreen screen) {
-            super(x, y, 200, 20, I18n.translate(String.format("gui.tm.%s.%s", ModRegistries.TIME_LINES.getId(tl).getNamespace(), ModRegistries.TIME_LINES.getId(tl).getPath())), TimeMachineScreen::clickHandler);
+            super(x, y, 200, 20, new TranslatableText(String.format("gui.tm.%s.%s", ModRegistries.TIME_LINES.getId(tl).getNamespace(), ModRegistries.TIME_LINES.getId(tl).getPath())), TimeMachineScreen::clickHandler);
             this.screen = screen;
             this.tl = tl;
             this.active = tl.getMinTier() <= tm.getTier();
@@ -84,11 +84,11 @@ public class TimeMachineScreen extends Screen {
     private static void clickHandler(ButtonWidget button) {
         TimeLineButton b = (TimeLineButton) button;
         MinecraftClient.getInstance().openScreen(null);
-        if (b.tl.getDimensionType() != b.screen.player.dimension && com.rdvdev2.TimeTravelMod.common.world.dimension.TimeLine.isValidTimeLine(b.screen.player.world)) {
+        if (b.tl.getWorldKey() != b.screen.player.world.getRegistryKey() && com.rdvdev2.TimeTravelMod.common.world.dimension.TimeLine.isValidTimeLine(b.screen.player.world)) {
             DimensionTpPKT pkt = new DimensionTpPKT(b.tl, b.screen.tm, b.screen.pos, b.screen.side, b.screen.additionalEntities);
             ClientSidePacketRegistry.INSTANCE.sendToServer(DimensionTpPKT.ID, pkt.encode());
         } else {
-            b.screen.player.sendMessage(new TranslatableText("gui.tm.error"));
+            b.screen.player.sendMessage(new TranslatableText("gui.tm.error"), false);
         }
     }
 }

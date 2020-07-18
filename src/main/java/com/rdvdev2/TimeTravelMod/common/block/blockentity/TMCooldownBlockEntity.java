@@ -2,6 +2,7 @@ package com.rdvdev2.TimeTravelMod.common.block.blockentity;
 
 import com.rdvdev2.TimeTravelMod.ModBlocks;
 import com.rdvdev2.TimeTravelMod.api.timemachine.block.TimeMachineCoreBlock;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Tickable;
@@ -41,8 +42,8 @@ public class TMCooldownBlockEntity extends BlockEntity implements Tickable {
     }
     
     @Override
-    public void fromTag(CompoundTag tag) {
-        super.fromTag(tag);
+    public void fromTag(BlockState state, CompoundTag tag) {
+        super.fromTag(state, tag);
         if (tag.contains("ticks")) this.remainingTicks = tag.getInt("ticks");
     }
     

@@ -1,7 +1,8 @@
 package com.rdvdev2.TimeTravelMod.common.world.dimension;
 
 import com.rdvdev2.TimeTravelMod.api.dimension.TimeLine;
-import net.minecraft.world.dimension.DimensionType;
+import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.world.World;
 
 public class PresentTimeLine implements TimeLine {
     
@@ -13,8 +14,8 @@ public class PresentTimeLine implements TimeLine {
     }
     
     @Override
-    public DimensionType getDimensionType() {
-        return DimensionType.OVERWORLD;
+    public RegistryKey<World> getWorldKey() {
+        return World.OVERWORLD;
     }
     
     @Override

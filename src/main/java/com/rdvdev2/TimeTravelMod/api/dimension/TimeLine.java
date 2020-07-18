@@ -1,10 +1,7 @@
 package com.rdvdev2.TimeTravelMod.api.dimension;
 
-import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
-import net.minecraft.world.dimension.DimensionType;
-
-import java.util.function.BiFunction;
 
 /**
  * This interface defines a Time Line. It creates abd warps around the DimensionType object of the Dimension.
@@ -20,10 +17,10 @@ public interface TimeLine {
     int getMinTier();
     
     /**
-     * Gets the DimensionType associated to this Time Line
+     * Gets the {@link RegistryKey} of the {@link World} associated to this Time Line
      * @return The DimensionType object
      */
-    DimensionType getDimensionType();
+    RegistryKey<World> getWorldKey();
     
     /**
      * Gets the corruption of the Time Line
@@ -34,12 +31,10 @@ public interface TimeLine {
     /**
      * Creates a new Time Line
      * @param minTier The minimum Time Machine tier required to travel to this Time Line
-     * @param dimensionFactory See {@link net.fabricmc.fabric.api.dimension.v1.FabricDimensionType.Builder#factory(BiFunction)}
-     * @param skyLight See {@link net.fabricmc.fabric.api.dimension.v1.FabricDimensionType.Builder#skyLight(boolean)}
-     * @param identifier See {@link net.fabricmc.fabric.api.dimension.v1.FabricDimensionType.Builder#buildAndRegister(Identifier)}
+     * @param worldKey The {@link RegistryKey} of the {@link World} associated to this Time Line
      * @return The new Time Line
      */
-    static TimeLine getNew(int minTier, BiFunction<World, DimensionType, ? extends AbstractTimeLineDimension> dimensionFactory, boolean skyLight, Identifier identifier) {
-        return new com.rdvdev2.TimeTravelMod.common.world.dimension.TimeLine(minTier, dimensionFactory, skyLight, identifier);
+    static TimeLine getNew(int minTier, RegistryKey<World> worldKey) {
+        return new com.rdvdev2.TimeTravelMod.common.world.dimension.TimeLine(minTier, worldKey);
     }
 }

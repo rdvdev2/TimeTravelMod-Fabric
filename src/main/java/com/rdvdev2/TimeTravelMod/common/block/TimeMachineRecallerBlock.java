@@ -22,9 +22,9 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import net.minecraft.world.dimension.DimensionType;
 
 import java.util.List;
 
@@ -50,9 +50,9 @@ public class TimeMachineRecallerBlock extends Block implements BlockEntityProvid
     public BlockEntity createBlockEntity(BlockView view) {
         return new TimeMachineRecallerBlockEntity();
     }
-    
+
     @Override
-    public void onBlockRemoved(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
+    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         if (newState.getBlock() != this) {
             world.removeBlockEntity(pos);
         }
@@ -75,7 +75,7 @@ public class TimeMachineRecallerBlock extends Block implements BlockEntityProvid
                         if (world instanceof ServerWorld && tile instanceof TimeMachineRecallerBlockEntity) {
                             BlockPos controllerPos = ((TimeMachineRecallerBlockEntity) tile).getControllerPos();
                             Direction side = ((TimeMachineRecallerBlockEntity) tile).getSide();
-                            DimensionType searchDim = ((TimeMachineRecallerBlockEntity) tile).getDest();
+                            RegistryKey<World> searchDim = ((TimeMachineRecallerBlockEntity) tile).getDest();
                             boolean ret = searchRecall((ServerWorld) world, world.getServer().getWorld(searchDim), controllerPos, side, pos);
                             world.setBlockState(pos, state.with(CONFIGURED, ret).with(TRIGGERED, true));
                         }
@@ -100,7 +100,7 @@ public class TimeMachineRecallerBlock extends Block implements BlockEntityProvid
             if (tile instanceof TimeMachineRecallerBlockEntity) {
                 BlockPos _controllerPos = ((TimeMachineRecallerBlockEntity) tile).getControllerPos();
                 Direction _side = ((TimeMachineRecallerBlockEntity) tile).getSide();
-                DimensionType _searchDim = ((TimeMachineRecallerBlockEntity) tile).getDest();
+                RegistryKey<World> _searchDim = ((TimeMachineRecallerBlockEntity) tile).getDest();
                 if (controllerPos.equals(_controllerPos) && side.equals(_side)) {
                     return searchRecall(origin, origin.getServer().getWorld(_searchDim), controllerPos, side, recallerPos);
                 } else {
@@ -113,10 +113,10 @@ public class TimeMachineRecallerBlock extends Block implements BlockEntityProvid
     }
 
     private boolean tryRecall(TimeMachine tm, ServerWorld foundWorld, ServerWorld recallWorld, BlockPos controllerPos, Direction side) {
-        DimensionType foundDim = foundWorld.getDimension().getType();
+        RegistryKey<World> foundDim = foundWorld.getRegistryKey();
         TimeLine tl = null;
         for (TimeLine _tl : ModRegistries.TIME_LINES) {
-            if (_tl.getDimensionType() == foundDim) {
+            if (_tl.getWorldKey() == foundDim) {
                 tl = _tl;
                 break;
             }
@@ -133,10 +133,10 @@ public class TimeMachineRecallerBlock extends Block implements BlockEntityProvid
             tm.isCooledDown(foundWorld, controllerPos, side) &&
             !tm.isOverloaded(foundWorld, controllerPos, side)) {
                 if (tm.getTier() >= tl.getMinTier()) {
-                    applyCorruption(tm, foundDim, recallWorld.getDimension().getType(), foundWorld.getServer());
+                    applyCorruption(tm, foundWorld, recallWorld, foundWorld.getServer());
                     tm.teleporterTasks(null, recallWorld, foundWorld, controllerPos, side, true);
                     final TimeMachine finalTm = tm;
-                    entities.forEach(entity -> FabricDimensions.teleport(entity, recallWorld.getDimension().getType(), new TimeMachineEntityPlacer(finalTm, foundWorld, controllerPos, side, false)));
+                    entities.forEach(entity -> FabricDimensions.teleport(entity, recallWorld, new TimeMachineEntityPlacer(finalTm, foundWorld, controllerPos, side, false)));
                     return true;
                 } else {
                     return false;

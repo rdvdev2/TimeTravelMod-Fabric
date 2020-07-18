@@ -5,7 +5,6 @@ import com.rdvdev2.TimeTravelMod.ModConfig;
 import net.fabricmc.loader.FabricLoader;
 import net.fabricmc.loader.api.metadata.ModMetadata;
 import net.minecraft.SharedConstants;
-import net.minecraft.network.MessageType;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.TranslatableText;
 
@@ -32,7 +31,7 @@ public class MiscCallbackHandler {
                     }
                 }
                 if (!currentVersion.equals(targetVersion)) {
-                    player.sendChatMessage(new TranslatableText("chat.ttm.outdated"), MessageType.SYSTEM);
+                    player.sendMessage(new TranslatableText("chat.ttm.outdated"), false);
                 }
             } catch (Exception e) {
                 e.printStackTrace();

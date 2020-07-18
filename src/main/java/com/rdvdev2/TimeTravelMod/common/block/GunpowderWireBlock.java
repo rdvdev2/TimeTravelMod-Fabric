@@ -9,7 +9,6 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.WireConnection;
-import net.minecraft.entity.EntityContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.Items;
@@ -28,10 +27,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -48,12 +48,12 @@ public class GunpowderWireBlock extends Block {
     private final Set<BlockPos> blocksNeedingUpdate = Sets.newHashSet();
 
     public GunpowderWireBlock() {
-        super(FabricBlockSettings.of(Material.PART).nonOpaque().hardness(0).collidable(false).build());
+        super(FabricBlockSettings.of(Material.SUPPORTED).nonOpaque().hardness(0).collidable(false).build());
         this.setDefaultState(this.getStateManager().getDefaultState().with(NORTH, WireConnection.NONE).with(EAST, WireConnection.NONE).with(SOUTH, WireConnection.NONE).with(WEST, WireConnection.NONE).with(BURNED, false));
     }
 
     @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView worldIn, BlockPos pos, EntityContext context) {
+    public VoxelShape getOutlineShape(BlockState state, BlockView worldIn, BlockPos pos, ShapeContext context) {
         return SHAPES[getAABBIndex(state)];
     }
     
@@ -88,50 +88,48 @@ public class GunpowderWireBlock extends Block {
         BlockPos blockpos = ctx.getBlockPos();
         return this.getDefaultState().with(WEST, this.getSide(iblockreader, blockpos, Direction.WEST)).with(EAST, this.getSide(iblockreader, blockpos, Direction.EAST)).with(NORTH, this.getSide(iblockreader, blockpos, Direction.NORTH)).with(SOUTH, this.getSide(iblockreader, blockpos, Direction.SOUTH));
     }
-    
+
     @Override
-    public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, IWorld world, BlockPos pos, BlockPos neighborPos) {
-        if (facing == Direction.DOWN || state.get(BURNED)) {
+    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState newState, WorldAccess world, BlockPos pos, BlockPos posFrom) {
+        if (direction == Direction.DOWN || state.get(BURNED)) {
             return state;
         } else {
-            return facing == Direction.UP ? state.with(WEST, this.getSide(world, pos, Direction.WEST)).with(EAST, this.getSide(world, pos, Direction.EAST)).with(NORTH, this.getSide(world, pos, Direction.NORTH)).with(SOUTH, this.getSide(world, pos, Direction.SOUTH)) : state.with(FACING_PROPERTY_MAP.get(facing), this.getSide(world, pos, facing));
+            return direction == Direction.UP ? state.with(WEST, this.getSide(world, pos, Direction.WEST)).with(EAST, this.getSide(world, pos, Direction.EAST)).with(NORTH, this.getSide(world, pos, Direction.NORTH)).with(SOUTH, this.getSide(world, pos, Direction.SOUTH)) : state.with(FACING_PROPERTY_MAP.get(direction), this.getSide(world, pos, direction));
         }
     }
-    
-    @Override
-    public void method_9517(BlockState state, IWorld world, BlockPos pos, int flags) {
-        try (BlockPos.PooledMutable blockpos$pooledmutableblockpos = BlockPos.PooledMutable.get()) {
-            for(Direction enumfacing : Direction.Type.HORIZONTAL) {
-                WireConnection redstoneside = state.get(FACING_PROPERTY_MAP.get(enumfacing));
-                if (redstoneside != WireConnection.NONE && world.getBlockState(blockpos$pooledmutableblockpos.set(pos).setOffset(enumfacing)).getBlock() != this) {
-                    blockpos$pooledmutableblockpos.setOffset(Direction.DOWN);
-                    BlockState iblockstate = world.getBlockState(blockpos$pooledmutableblockpos);
-                    if (iblockstate.getBlock() != Blocks.OBSERVER) {
-                        BlockPos blockpos = blockpos$pooledmutableblockpos.offset(enumfacing.getOpposite());
-                        BlockState iblockstate1 = iblockstate.getStateForNeighborUpdate(enumfacing.getOpposite(), world.getBlockState(blockpos), world, blockpos$pooledmutableblockpos, blockpos);
-                        replaceBlock(iblockstate, iblockstate1, world, blockpos$pooledmutableblockpos, flags);
-                    }
 
-                    blockpos$pooledmutableblockpos.set(pos).setOffset(enumfacing).setOffset(Direction.UP);
-                    BlockState iblockstate3 = world.getBlockState(blockpos$pooledmutableblockpos);
-                    if (iblockstate3.getBlock() != Blocks.OBSERVER) {
-                        BlockPos blockpos1 = blockpos$pooledmutableblockpos.offset(enumfacing.getOpposite());
-                        BlockState iblockstate2 = iblockstate3.getStateForNeighborUpdate(enumfacing.getOpposite(), world.getBlockState(blockpos1), world, blockpos$pooledmutableblockpos, blockpos1);
-                        replaceBlock(iblockstate3, iblockstate2, world, blockpos$pooledmutableblockpos, flags);
-                    }
-                }
+    @Override
+    public void prepare(BlockState state, WorldAccess world, BlockPos pos, int flags, int i) {
+        BlockPos.Mutable mutable = new BlockPos.Mutable();
+        Iterator<Direction> horizontalIterator = Direction.Type.HORIZONTAL.iterator();
+
+        while (horizontalIterator.hasNext()) {
+            Direction direction = horizontalIterator.next();
+            WireConnection wireConnection = state.get(FACING_PROPERTY_MAP.get(direction));
+            if (wireConnection != WireConnection.NONE && !world.getBlockState(mutable.set(pos, direction)).isOf(this)) {
+                mutable.move(Direction.DOWN);
+                BlockState blockState = world.getBlockState(mutable);
+                BlockPos blockpos = mutable.offset(direction.getOpposite());
+                BlockState blockState2 = blockState.getStateForNeighborUpdate(direction.getOpposite(), world.getBlockState(blockpos), world, mutable, blockpos);
+                replaceBlock(blockState, blockState2, world, mutable, flags, i);
+
+                mutable.set(pos, direction).move(Direction.UP);
+                BlockState blockState3 = world.getBlockState(mutable);
+                BlockPos blockPos2 = mutable.offset(direction.getOpposite());
+                BlockState blockState4 = blockState3.getStateForNeighborUpdate(direction.getOpposite(), world.getBlockState(blockPos2), world, mutable, blockPos2);
+                replaceBlock(blockState3, blockState4, world, mutable, flags, i);
             }
         }
     }
 
-    private WireConnection getSide(WorldView worldIn, BlockPos pos, Direction face) {
-        BlockPos blockpos = pos.offset(face);
-        BlockState blockstate = worldIn.getBlockState(blockpos);
-        BlockState stateUp = worldIn.getBlockState(pos.up());
-        if (!stateUp.isSimpleFullBlock(worldIn, pos.up())) {
-            boolean flag = Block.isSideSolidFullSquare(blockstate, worldIn, blockpos, Direction.UP) || blockstate.getBlock() == Blocks.HOPPER;
-            if (flag && canConnectTo(worldIn.getBlockState(blockpos.up()))) {
-                if (blockstate.isFullCube(worldIn, blockpos)) {
+    private WireConnection getSide(BlockView blockView, BlockPos blockPos, Direction direction) {
+        BlockPos blockpos2 = blockPos.offset(direction);
+        BlockState blockstate = blockView.getBlockState(blockpos2);
+        BlockState stateUp = blockView.getBlockState(blockpos2.up());
+        if (!stateUp.isSolidBlock(blockView, blockpos2.up())) {
+            boolean flag = Block.isSideSolidFullSquare(blockstate, blockView, blockpos2, Direction.UP);
+            if (flag && canConnectTo(blockView.getBlockState(blockpos2.up()))) {
+                if (blockstate.isSideSolidFullSquare(blockView, blockpos2, direction.getOpposite())) {
                     return WireConnection.UP;
                 }
 
@@ -139,7 +137,7 @@ public class GunpowderWireBlock extends Block {
             }
         }
 
-        return !canConnectTo(blockstate) && (blockstate.isSimpleFullBlock(worldIn, blockpos) || !canConnectTo(worldIn.getBlockState(blockpos.down()))) ? WireConnection.NONE : WireConnection.SIDE;
+        return !canConnectTo(blockstate) && (blockstate.isSolidBlock(blockView, blockpos2) || !canConnectTo(blockView.getBlockState(blockpos2.down()))) ? WireConnection.NONE : WireConnection.SIDE;
     }
     
     
@@ -173,7 +171,7 @@ public class GunpowderWireBlock extends Block {
 
     @Override
     public void onBlockAdded(BlockState state, World worldIn, BlockPos pos, BlockState oldState, boolean mistery) {
-        if (oldState.getBlock() != state.getBlock() && !worldIn.isClient) {
+        if (!oldState.isOf(state.getBlock()) && !worldIn.isClient) {
             this.updateSurroundingWires(worldIn, pos, state);
 
             for(Direction facing : Direction.Type.VERTICAL) {
@@ -186,7 +184,7 @@ public class GunpowderWireBlock extends Block {
 
             for(Direction facing : Direction.Type.HORIZONTAL) {
                 BlockPos blockpos = pos.offset(facing);
-                if (worldIn.getBlockState(blockpos).isSimpleFullBlock(worldIn, blockpos)) {
+                if (worldIn.getBlockState(blockpos).isSolidBlock(worldIn, blockpos)) {
                     this.notifyWireNeighborsOfStateChange(worldIn, blockpos.up());
                 } else {
                     this.notifyWireNeighborsOfStateChange(worldIn, blockpos.down());
@@ -195,11 +193,11 @@ public class GunpowderWireBlock extends Block {
 
         }
     }
-    
+
     @Override
-    public void onBlockRemoved(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
+    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         if (!moved && state.getBlock() != newState.getBlock()) {
-            super.onBlockRemoved(state, world, pos, newState, moved);
+            super.onStateReplaced(state, world, pos, newState, moved);
             if (!world.isClient) {
                 for(Direction facing : Direction.values()) {
                     world.updateNeighborsAlways(pos.offset(facing), this);
@@ -213,7 +211,7 @@ public class GunpowderWireBlock extends Block {
 
                 for(Direction facing : Direction.Type.HORIZONTAL) {
                     BlockPos blockpos = pos.offset(facing);
-                    if (world.getBlockState(blockpos).isSimpleFullBlock(world, blockpos)) {
+                    if (world.getBlockState(blockpos).isSolidBlock(world, blockpos)) {
                         this.notifyWireNeighborsOfStateChange(world, blockpos.up());
                     } else {
                         this.notifyWireNeighborsOfStateChange(world, blockpos.down());

@@ -4,7 +4,6 @@ import com.rdvdev2.TimeTravelMod.ModConfig;
 import com.rdvdev2.TimeTravelMod.api.timemachine.TimeMachine;
 import com.rdvdev2.TimeTravelMod.api.timemachine.upgrade.TimeMachineUpgrade;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.network.MessageType;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.ClickEvent;
@@ -51,7 +50,7 @@ public class TimeMachineUtils {
                     .map(op -> server.getPlayerManager().getPlayer(op))
                     .forEach(op -> {
                         if (op != null)
-                        op.sendChatMessage(error.getCheaterReport(player), MessageType.GAME_INFO);
+                        op.sendMessage(error.getCheaterReport(player), true);
                     });
             return false;
         } else return false;
@@ -83,7 +82,7 @@ public class TimeMachineUtils {
 
         private static TranslatableText getBanButton(ServerPlayerEntity player) {
             TranslatableText textComponent = new TranslatableText("timetravelmod.ban");
-            textComponent.setStyle(new Style().setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/ban "+player.getName().asString())).setColor(Formatting.RED));
+            textComponent.setStyle(Style.EMPTY.withClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/ban "+player.getName().asString())).withColor(Formatting.RED));
             return textComponent;
         }
     }

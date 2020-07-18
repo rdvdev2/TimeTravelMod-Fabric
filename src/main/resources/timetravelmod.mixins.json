@@ -3,10 +3,8 @@
   "package": "com.rdvdev2.TimeTravelMod.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "IBiomeSourceType",
-    "ICriterions",
+    "ICriteria",
     "IDamageSource",
-    "MixinOverworldDimension",
     "MixinPlayerManager"
   ],
   "client": [

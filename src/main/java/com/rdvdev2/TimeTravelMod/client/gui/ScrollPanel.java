@@ -28,6 +28,7 @@ import net.minecraft.client.gui.Element;
 import net.minecraft.client.render.BufferBuilder;
 import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.render.VertexFormats;
+import net.minecraft.client.util.math.MatrixStack;
 import org.lwjgl.opengl.GL11;
 
 import java.util.Collections;
@@ -72,7 +73,7 @@ public abstract class ScrollPanel extends AbstractParentElement implements Drawa
      * @param mouseY
      * @param mouseX
      */
-    protected abstract void drawPanel(int entryRight, int relativeY, Tessellator tess, int mouseX, int mouseY);
+    protected abstract void drawPanel(MatrixStack matrixStack, int entryRight, int relativeY, Tessellator tess, int mouseX, int mouseY);
     
     protected boolean clickPanel(double mouseX, double mouseY, int button) { return false; }
     
@@ -177,9 +178,9 @@ public abstract class ScrollPanel extends AbstractParentElement implements Drawa
         }
         return false;
     }
-    
+
     @Override
-    public void render(int mouseX, int mouseY, float partialTicks)
+    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta)
     {
         this.drawBackground();
         
@@ -193,13 +194,13 @@ public abstract class ScrollPanel extends AbstractParentElement implements Drawa
         
         if (this.client.world != null)
         {
-            this.drawGradientRect(this.left, this.top, this.right, this.bottom, 0xC0101010, 0xD0101010);
+            this.drawGradientRect(matrices, this.left, this.top, this.right, this.bottom, 0xC0101010, 0xD0101010);
         }
         else // Draw dark dirt background
         {
             RenderSystem.disableLighting();
             RenderSystem.disableFog();
-            this.client.getTextureManager().bindTexture(DrawableHelper.BACKGROUND_LOCATION);
+            this.client.getTextureManager().bindTexture(DrawableHelper.BACKGROUND_TEXTURE);
             RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
             final float texScale = 32.0F;
             worldr.begin(GL11.GL_QUADS, VertexFormats.POSITION_TEXTURE_COLOR);
@@ -211,7 +212,7 @@ public abstract class ScrollPanel extends AbstractParentElement implements Drawa
         }
         
         int baseY = this.top + border - (int)this.scrollDistance;
-        this.drawPanel(right, baseY, tess, mouseX, mouseY);
+        this.drawPanel(matrices, right, baseY, tess, mouseX, mouseY);
         
         RenderSystem.disableDepthTest();
         
@@ -254,9 +255,9 @@ public abstract class ScrollPanel extends AbstractParentElement implements Drawa
         GL11.glDisable(GL11.GL_SCISSOR_TEST);
     }
     
-    protected void drawGradientRect(int left, int top, int right, int bottom, int color1, int color2)
+    protected void drawGradientRect(MatrixStack matrices, int left, int top, int right, int bottom, int color1, int color2)
     {
-        this.fillGradient(top, left, right, bottom, color1, color2);
+        this.fillGradient(matrices, top, left, right, bottom, color1, color2);
     }
     
     @Override

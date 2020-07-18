@@ -15,7 +15,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.network.MessageType;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.BlockRotation;
@@ -155,7 +154,7 @@ public class TimeMachine implements com.rdvdev2.TimeTravelMod.api.timemachine.Ti
                 }
             } else {
                 if (playerIn instanceof ServerPlayerEntity) {
-                    ((ServerPlayerEntity) playerIn).sendChatMessage(error.getClientError(), MessageType.GAME_INFO);
+                    ((ServerPlayerEntity) playerIn).sendMessage(error.getClientError(), true);
                 }
             }
         }

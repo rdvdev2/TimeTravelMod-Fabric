@@ -6,8 +6,6 @@ import net.minecraft.world.biome.layer.*;
 import net.minecraft.world.biome.layer.type.ParentedLayer;
 import net.minecraft.world.biome.layer.util.*;
 import net.minecraft.world.biome.source.BiomeLayerSampler;
-import net.minecraft.world.gen.chunk.OverworldChunkGeneratorConfig;
-import net.minecraft.world.level.LevelGeneratorType;
 
 import java.util.function.LongFunction;
 
@@ -34,14 +32,14 @@ public class OldWestLayers {
         return layerFactory;
     }
     
-    public static BiomeLayerSampler build(long seed, LevelGeneratorType generatorType, OverworldChunkGeneratorConfig settings) {
-        LayerFactory<CachingLayerSampler> layerFactory = build(generatorType, settings, (salt) -> {
+    public static BiomeLayerSampler build(long seed, boolean legacyBiomeInitLayer, int biomeSize, int riverSize) {
+        LayerFactory<CachingLayerSampler> layerFactory = build(legacyBiomeInitLayer, biomeSize, riverSize, (salt) -> {
             return new CachingLayerContext(25, seed, salt);
         });
         return new BiomeLayerSampler(layerFactory);
     }
 
-    public static <T extends LayerSampler, C extends LayerSampleContext<T>> LayerFactory<T> build(LevelGeneratorType generatorType, OverworldChunkGeneratorConfig settings, LongFunction<C> contextFactory) {
+    public static <T extends LayerSampler, C extends LayerSampleContext<T>> LayerFactory<T> build(boolean legacyBiomeInitLayer, int biomeSize, int riverSize, LongFunction<C> contextFactory) {
         LayerFactory<T> factory = ContinentLayer.INSTANCE.create(contextFactory.apply(1L));
         factory = ScaleLayer.FUZZY.create(contextFactory.apply(2000L), factory);
         factory = IncreaseEdgeCurvatureLayer.INSTANCE.create(contextFactory.apply(1L), factory);
@@ -60,26 +58,23 @@ public class OldWestLayers {
         factory = IncreaseEdgeCurvatureLayer.INSTANCE.create(contextFactory.apply(4L), factory);
         factory = AddDeepOceanLayer.INSTANCE.create(contextFactory.apply(4L), factory);
         factory = stack(1000L, ScaleLayer.NORMAL, factory, 0, contextFactory);
-        int i = generatorType == LevelGeneratorType.LARGE_BIOMES ? 6 : settings.getBiomeSize();
-        int j = settings.getRiverSize();
-
         LayerFactory<T> factory2 = stack(1000L, ScaleLayer.NORMAL, factory, 0, contextFactory);
         factory2 = SimpleLandNoiseLayer.INSTANCE.create((LayerSampleContext)contextFactory.apply(100L), factory2);
         LayerFactory<T> factory3 = getOldWestBiomeLayer(factory, contextFactory); // Custom biomes
         LayerFactory<T> factory4 = stack(1000L, ScaleLayer.NORMAL, factory2, 2, contextFactory);
         factory3 = AddHillsLayer.INSTANCE.create((LayerSampleContext) contextFactory.apply(1000L), factory3, factory4);
         factory2 = stack(1000L, ScaleLayer.NORMAL, factory2, 2, contextFactory);
-        factory2 = stack(1000L, ScaleLayer.NORMAL, factory2, j, contextFactory);
+        factory2 = stack(1000L, ScaleLayer.NORMAL, factory2, riverSize, contextFactory);
         factory2 = NoiseToRiverLayer.INSTANCE.create((LayerSampleContext) contextFactory.apply(1L), factory2); // Custom rivers
         factory2 = SmoothenShorelineLayer.INSTANCE.create((LayerSampleContext) contextFactory.apply(1000L), factory2);
 
-        for(int k = 0; k < i; ++k) {
-            factory3 = ScaleLayer.NORMAL.create((LayerSampleContext) contextFactory.apply((long)(1000 + k)), factory3);
-            if (k == 0) {
+        for(int i = 0; i < biomeSize; ++i) {
+            factory3 = ScaleLayer.NORMAL.create((LayerSampleContext) contextFactory.apply((long)(1000 + i)), factory3);
+            if (i == 0) {
                 factory3 = IncreaseEdgeCurvatureLayer.INSTANCE.create((LayerSampleContext) contextFactory.apply(3L), factory3);
             }
 
-            if (k == 1 || i == 1) {
+            if (i == 1 || biomeSize == 1) {
                 factory3 = AddEdgeBiomesLayer.INSTANCE.create((LayerSampleContext)contextFactory.apply(1000L), factory3);
             }
         }

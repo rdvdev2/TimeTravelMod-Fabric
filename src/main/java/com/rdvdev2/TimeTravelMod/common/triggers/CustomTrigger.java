@@ -3,11 +3,13 @@ package com.rdvdev2.TimeTravelMod.common.triggers;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import net.minecraft.advancement.PlayerAdvancementTracker;
+import net.minecraft.advancement.criterion.AbstractCriterion;
 import net.minecraft.advancement.criterion.AbstractCriterionConditions;
 import net.minecraft.advancement.criterion.Criterion;
+import net.minecraft.predicate.entity.AdvancementEntityPredicateDeserializer;
+import net.minecraft.predicate.entity.EntityPredicate;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 
@@ -15,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
 
-public class CustomTrigger implements Criterion<CustomTrigger.Instance> {
+public class CustomTrigger extends AbstractCriterion<CustomTrigger.Instance> {
 
     private final Identifier resourceloacation;
     public final Map<PlayerAdvancementTracker, Listeners> listeners = Maps.newHashMap();
@@ -28,40 +30,11 @@ public class CustomTrigger implements Criterion<CustomTrigger.Instance> {
     public Identifier getId() {
         return this.resourceloacation;
     }
-    
-    @Override
-    public void beginTrackingCondition(PlayerAdvancementTracker playerAdvancements, ConditionsContainer<Instance> listener) {
-        Listeners triggerListeners = listeners.get(playerAdvancements);
 
-        if (triggerListeners == null) {
-            triggerListeners = new Listeners(playerAdvancements);
-            listeners.put(playerAdvancements, triggerListeners);
-        }
-
-        triggerListeners.add(listener);
-    }
-    
-    @Override
-    public void endTrackingCondition(PlayerAdvancementTracker playerAdvancements, ConditionsContainer<Instance> listener) {
-        Listeners triggerListeners = listeners.get(playerAdvancements);
-
-        if (triggerListeners != null) {
-            triggerListeners.remove(listener);
-
-            if (triggerListeners.isEmpty()) {
-                listeners.remove(playerAdvancements);
-            }
-        }
-    }
-    
-    @Override
-    public void endTracking(PlayerAdvancementTracker playerAdvancements) {
-        listeners.remove(playerAdvancements);
-    }
 
     @Override
-    public Instance conditionsFromJson(JsonObject jsonObject, JsonDeserializationContext jsonDeserializationContext) {
-        return new Instance(getId());
+    public Instance conditionsFromJson(JsonObject obj, EntityPredicate.Extended extended, AdvancementEntityPredicateDeserializer predicateDeserializer) {
+        return new Instance(getId(), extended);
     }
 
     public void trigger(ServerPlayerEntity player) {
@@ -74,8 +47,8 @@ public class CustomTrigger implements Criterion<CustomTrigger.Instance> {
 
     public static class Instance extends AbstractCriterionConditions {
 
-        public Instance(Identifier rl) {
-            super(rl);
+        public Instance(Identifier rl, EntityPredicate.Extended playerPredicate) {
+            super(rl, playerPredicate);
         }
 
         public boolean test() {
