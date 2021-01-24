@@ -1,5 +1,4 @@
 {
-    "advancements.time_traveling.root.title": "Time Travel Mod",
     "advancements.time_traveling.root.description": "Le cœur du mod",
     "advancements.time_traveling.not_diamonds.title": "Drôles de diamants",
     "advancements.time_traveling.not_diamonds.description": "Trouvez un minerai de cristal temporel.",
@@ -38,7 +37,6 @@
     "item.time_travel_mod.time_machine_tracker": "Émetteur de machine temporelle",
     "item.time_travel_mod.communications_circuit": "Circuit de communication",
     "item.time_travel_mod.gunpowder_wire": "Traînée de poudre à canon",
-    "itemGroup.time_travel_mod.main": "Time Travel Mod",
     "block.time_travel_mod.heavy_block": "Bloc lourd",
     "block.time_travel_mod.reinforced_heavy_block": "Bloc lourd renforcé",
     "block.time_travel_mod.temporal_cauldron": "Chaudron temporel",
@@ -62,7 +60,6 @@
     "time_travel_mod.error.incompatible_upgrades": "Les améliorations suivantes de la machine temporelle sont incompatibles : %s",
     "time_travel_mod.cheater_report": "Une requête de voyage dans le temps a été reçue sur le serveur, mais le joueur qui l'a émise (%s) est potentiellement en train de tricher. Raison : %s. Nous vous suggérons de le %s.",
     "time_travel_mod.ban": "[BANNIR]",
-    "time_travel_mod.generic.comma": "%s, %s",
     "time_travel_mod.generic.and": "%s et %s",
     "tm.time_travel_mod.creative.description": "Cet objet est uniquement disponible en mode Créatif et permet à son utilisateur de voyager vers n'importe quelle époque sans aucune restriction ou temps de refroidissement.",
     "tm.time_travel_mod.creative.name": "Machine temporelle illimitée",
