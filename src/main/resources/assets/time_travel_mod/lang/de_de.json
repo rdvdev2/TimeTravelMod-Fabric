@@ -1,5 +1,4 @@
 {
-    "advancements.time_traveling.root.title": "Time Travel Mod",
     "advancements.time_traveling.root.description": "Der Kern der Modifikation",
     "advancements.time_traveling.doesnt_look_good.title": "Das sieht nicht gut aus",
     "gui.tm.time_travel_mod.old_west": "Alter Westen",
@@ -7,7 +6,6 @@
     "gui.tm_engineer_book.tms": "Zeitmaschinen",
     "gui.tm_engineer_book.upgrades": "Zeitmaschinen-Upgrades",
     "gui.tm_engineer_book.compatible_tms": "Kompatible Zeitmaschinen",
-    "itemGroup.time_travel_mod.main": "Time Travel Mod",
     "time_travel_mod.error.not_built.client": "Die Zeitmaschine wurde nicht richtig gebaut!",
     "time_travel_mod.error.not_built.server": "Die vom Spieler benutzte Zeitmaschine ist nicht gebaut",
     "time_travel_mod.error.hot_cores.client": "Der Zeitmaschinenkern muss sich abkühlen!",
@@ -17,8 +15,6 @@
     "time_travel_mod.error.overloaded.client": "Die Zeitmaschine ist überlastet!",
     "time_travel_mod.error.overloaded.server": "Die vom Spieler verwendete Zeitmaschine ist überlastet",
     "time_travel_mod.cheater_report": "Eine Zeitreiseanfrage wurde auf dem Server empfangen, aber der Spieler, der sie gesendet hat (%s) ist möglicherweise ein Cheater. Grund: %s. Wir empfehlen Ihnen ihn zu %s.",
-    "time_travel_mod.ban": "[BAN]",
-    "time_travel_mod.generic.comma": "%s, %s",
     "time_travel_mod.generic.and": "%s und %s",
     "tm.time_travel_mod.tier_1.name": "Stufe 1 Zeitmaschine",
     "text.autoconfig.time_travel_mod.option.common.enableUpdatePromos.@Tooltip": "Wenn dies deaktiviert ist, wirst du nicht mehr über Mod-Updates beim Weltbeitritt informiert",
