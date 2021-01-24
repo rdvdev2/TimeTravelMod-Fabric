@@ -1,5 +1,4 @@
 {
-    "advancements.time_traveling.root.title": "Time Travel Mod",
     "advancements.time_traveling.root.description": "El núcleo del mod",
     "advancements.time_traveling.not_diamonds.title": "¡Eso no es diamante!",
     "advancements.time_traveling.not_diamonds.description": "Encuentra un mineral de Cristal de Tiempo",
@@ -38,7 +37,6 @@
     "item.time_travel_mod.time_machine_tracker": "Rastreador para Máquinas del Tiempo",
     "item.time_travel_mod.communications_circuit": "Circuito de Comunicaciones",
     "item.time_travel_mod.gunpowder_wire": "Mecha",
-    "itemGroup.time_travel_mod.main": "Time Travel Mod",
     "block.time_travel_mod.heavy_block": "Bloque Pesado",
     "block.time_travel_mod.reinforced_heavy_block": "Bloque Pesado Reforzado",
     "block.time_travel_mod.temporal_cauldron": "Caldero del Tiempo",
@@ -62,7 +60,6 @@
     "time_travel_mod.error.incompatible_upgrades": "Las siguientes mejoras para máquinas del tiempo son incompatibles: %s",
     "time_travel_mod.cheater_report": "Se recibió una solicitud de Viaje en el tiempo en el servidor, pero el jugador que la envió (%s) posiblemente está usando exploits. Motivo: %s. Te sugerimos que le hagas %s.",
     "time_travel_mod.ban": "[EXPULSAR]",
-    "time_travel_mod.generic.comma": "%s, %s",
     "time_travel_mod.generic.and": "%s y %s",
     "tm.time_travel_mod.creative.description": "Este objeto solo está disponible en modo Creativo. Usarlo te permite viajar a cualquier periodo temporal sin restricciones o enfriamientos.",
     "tm.time_travel_mod.creative.name": "Máquina del Tiempo (Creativo)",
