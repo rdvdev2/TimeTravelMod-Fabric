@@ -1,0 +1,20 @@
+{
+  "display": {
+    "icon": {
+      "item": "time_travel_mod:time_machine_core"
+    },
+    "title": {
+      "translate": "advancements.time_traveling.time_machine.title"
+    },
+    "description": {
+      "translate": "advancements.time_traveling.time_machine.description"
+    }
+  },
+  "parent": "time_travel_mod:time_traveling/not_diamonds",
+  "criteria": {
+    "use": {
+      "trigger": "time_travel_mod:access_time_machine",
+      "conditions": {}
+    }
+  }
+}

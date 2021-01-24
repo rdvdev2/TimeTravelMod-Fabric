@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "id": "time_travel_mod",
+  "version": "${version}",
+  "name": "Time Travel Mod",
+  "description": "Ever wanted to travel through time in Minecraft? Build your own time travel machine and discover a bunch of new worlds, objects and mobs!",
+  "authors": [
+    "rdvdev2"
+  ],
+  "contact": {
+    "email": "rdvdev2@gmail.com",
+    "homepage": "https://minecraft.curseforge.com/projects/time-travel-mod",
+    "issues": "https://github.com/rdvdev2/TimeTravelMod-Fabric/issues",
+    "sources": "https://github.com/rdvdev2/TimeTravelMod-Fabric"
+  },
+  "license": "GPL-3.0-only",
+  "icon": "assets/time_travel_mod/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.rdvdev2.timetravelmod.impl.Mod"
+    ],
+    "client": [
+      "com.rdvdev2.timetravelmod.impl.client.ModClient"
+    ],
+    "modmenu": [
+      "com.rdvdev2.timetravelmod.integration.ModMenu"
+    ]
+  },
+  "mixins": [
+    "mixins.json"
+  ],
+  "depends": {
+    "minecraft": "~1.16.2",
+    "fabricloader": "*",
+
+    "fabric-api-base": "*",
+    "fabric-biome-api-v1": "*",
+    "fabric-blockrenderlayer-v1": "*",
+    "fabric-command-api-v1": "*",
+    "fabric-dimensions-v1": "*",
+    "fabric-item-api-v1": "*",
+    "fabric-item-groups-v0": "*",
+    "fabric-networking-blockentity-v0": "*",
+    "fabric-networking-api-v1": "*",
+    "fabric-object-builder-api-v1": "*",
+    "fabric-renderer-registries-v1": "*",
+    "fabric-rendering-v1": "*",
+    "fabric-tool-attribute-api-v1": "*",
+
+    "autoconfig1u": "*",
+    "cloth-config2": "*",
+    "disable_custom_worlds_advice": "*",
+    "libgui": "*"
+  },
+
+  "custom": {
+    "time_travel_mod:update_url": "https://raw.githubusercontent.com/rdvdev2/TimeTravelMod-Fabric/${version}/metadata/versions"
+  }
+}

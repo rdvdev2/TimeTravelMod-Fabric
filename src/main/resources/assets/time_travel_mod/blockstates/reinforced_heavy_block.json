@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": [
+      { "model": "time_travel_mod:block/reinforced_heavy_block"}
+    ]
+  }
+}

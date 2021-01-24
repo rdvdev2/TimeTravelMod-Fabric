@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "time_travel_mod:block/reinforced_heavy_block"
+  }
+}

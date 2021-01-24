@@ -1,0 +1,12 @@
+{
+  "type": "time_travel_mod:old_west",
+  "generator": {
+    "type": "minecraft:noise",
+    "seed": 0,
+    "settings": "minecraft:overworld",
+    "biome_source": {
+      "type": "time_travel_mod:old_west",
+      "seed": 0
+    }
+  }
+}

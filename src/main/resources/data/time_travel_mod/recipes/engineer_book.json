@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "time_travel_mod:controller_circuit"
+    }
+  ],
+  "result": {
+    "item": "time_travel_mod:engineer_book"
+  }
+}

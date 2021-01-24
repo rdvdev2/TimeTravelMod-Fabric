@@ -1,0 +1,9 @@
+{
+  "type": "smelting",
+  "ingredient": {
+    "item": "time_travel_mod:time_crystal_ore"
+  },
+  "result": "time_travel_mod:time_crystal",
+  "experience": 3,
+  "cookingtime": 200
+}

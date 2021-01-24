@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:decorated",
+  "config": {
+    "feature": {
+      "type": "minecraft:decorated",
+      "config": {
+        "feature": {
+          "type": "minecraft:ore",
+          "config": {
+            "target": {
+              "tag": "minecraft:base_stone_overworld",
+              "predicate_type": "minecraft:tag_match"
+            },
+            "state": {
+              "Name": "time_travel_mod:time_crystal_ore"
+            },
+            "size": 4
+          }
+        },
+        "decorator": {
+          "type": "minecraft:range",
+          "config": {
+            "bottom_offset": 0,
+            "top_offset": 0,
+            "maximum": 16
+          }
+        }
+      }
+    },
+    "decorator": {
+      "type": "minecraft:square",
+      "config": {}
+    }
+  }
+}

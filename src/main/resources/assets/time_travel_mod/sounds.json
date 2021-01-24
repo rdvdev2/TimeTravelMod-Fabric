@@ -1,0 +1,22 @@
+{
+  "old_west_music": {
+    "category": "music",
+    "sounds": [
+      {
+        "name": "time_travel_mod:old_west/music_0",
+        "stream": true,
+        "volume":0.5
+      },
+      {
+        "name": "time_travel_mod:old_west/music_1",
+        "stream": true,
+        "volume": 0.5
+      },
+      {
+        "name": "time_travel_mod:old_west/music_2",
+        "stream": true,
+        "volume": 0.5
+      }
+    ]
+  }
+}

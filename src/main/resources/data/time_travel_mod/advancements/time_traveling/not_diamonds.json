@@ -1,0 +1,39 @@
+{
+  "display": {
+    "icon": {
+      "item": "time_travel_mod:time_crystal_ore"
+    },
+    "title": {
+      "translate": "advancements.time_traveling.not_diamonds.title"
+    },
+    "description": {
+      "translate": "advancements.time_traveling.not_diamonds.description"
+    }
+  },
+  "parent": "time_travel_mod:time_traveling/root",
+  "criteria": {
+    "smeltcrystal": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "time_travel_mod:time_crystal_ore"
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "recipes": [
+      "time_travel_mod:time_crystal",
+      "time_travel_mod:time_machine_basic_block",
+      "time_travel_mod:time_machine_control_panel",
+      "time_travel_mod:time_machine_core",
+      "time_travel_mod:controller_circuit_a",
+      "time_travel_mod:controller_circuit_b",
+      "time_travel_mod:temporal_cauldron_a",
+      "time_travel_mod:temporal_cauldron_b",
+      "time_travel_mod:engineer_book"
+    ]
+  }
+}

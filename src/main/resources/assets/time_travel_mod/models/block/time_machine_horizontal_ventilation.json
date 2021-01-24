@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "time_travel_mod:block/time_machine_horizontal_ventilation"
+  }
+}

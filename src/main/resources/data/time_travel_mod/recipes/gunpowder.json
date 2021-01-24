@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "time_travel_mod:gunpowder_wire"
+    }
+  ],
+  "result": {
+    "item": "minecraft:gunpowder"
+  }
+}

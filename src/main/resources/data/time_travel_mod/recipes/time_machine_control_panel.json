@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "time_travel_mod:time_machine_basic_block"
+    },
+    {
+      "item": "time_travel_mod:controller_circuit"
+    }
+  ],
+  "result": {
+    "item": "time_travel_mod:time_machine_control_panel"
+  }
+}

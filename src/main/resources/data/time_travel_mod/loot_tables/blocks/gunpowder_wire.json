@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "time_travel_mod:gunpowder_wire"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        },
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "time_travel_mod:gunpowder_wire",
+          "properties": {
+            "burned": "false"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "display": {
+    "icon": {
+      "item": "time_travel_mod:anomalous_atemporal_void"
+    },
+    "title": {
+      "translate": "advancements.time_traveling.doesnt_look_good.title"
+    },
+    "description": {
+      "translate": "advancements.time_traveling.doesnt_look_good.description"
+    },
+    "hidden": true
+  },
+  "parent": "time_travel_mod:time_traveling/time_machine",
+  "criteria": {
+    "explode": {
+      "trigger": "time_travel_mod:temporal_explosion",
+      "conditions": {}
+    }
+  }
+}

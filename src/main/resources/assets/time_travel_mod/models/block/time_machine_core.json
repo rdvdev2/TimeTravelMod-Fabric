@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "up": "time_travel_mod:block/time_machine_core",
+    "north": "time_travel_mod:block/time_machine_basic_block",
+    "south": "time_travel_mod:block/time_machine_basic_block",
+    "east": "time_travel_mod:block/time_machine_basic_block",
+    "west": "time_travel_mod:block/time_machine_basic_block",
+    "down": "time_travel_mod:block/time_machine_basic_block",
+    "particle": "time_travel_mod:block/time_machine_core"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.rdvdev2.timetravelmod.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "common.ICriteria",
+    "common.IDamageSource",
+    "common.IFluidBlock",
+    "common.IVanillaLayeredBiomeSource",
+    "common.MixinPlayerManager"
+  ],
+  "client": [
+    "client.MixinMinecraftClient"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

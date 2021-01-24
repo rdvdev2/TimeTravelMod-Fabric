@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:decorated",
+  "config": {
+    "feature": {
+      "type": "time_travel_mod:gunpowder_remains",
+      "config": {}
+    },
+    "decorator": {
+      "type": "minecraft:chance",
+      "config": {
+        "chance": 100
+      }
+    }
+  }
+}

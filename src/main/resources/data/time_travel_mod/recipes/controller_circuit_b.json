@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BBB",
+    "RCR",
+    "LAR" ],
+  "key": {
+    "B": [
+      {
+        "item": "minecraft:stone_button"
+      }
+    ],
+    "R": [
+      {
+        "item": "minecraft:redstone"
+      }
+    ],
+    "C": [
+      {
+        "item": "minecraft:comparator"
+      }
+    ],
+    "A": [
+      {
+        "item": "minecraft:repeater"
+      }
+    ],
+    "L": [
+      {
+        "item": "minecraft:lever"
+      }
+    ]
+  },
+  "result": {
+    "item": "time_travel_mod:controller_circuit"
+  }
+}

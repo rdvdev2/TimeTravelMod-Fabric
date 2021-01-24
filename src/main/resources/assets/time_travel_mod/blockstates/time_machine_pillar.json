@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": [
+      { "model": "time_travel_mod:block/time_machine_pillar"}
+    ]
+  }
+}

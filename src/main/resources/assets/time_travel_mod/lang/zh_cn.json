@@ -1,0 +1,17 @@
+{
+    "advancements.time_traveling.root.title": "时间旅行",
+    "gui.tm.time_travel_mod.old_west": "旧西部",
+    "gui.tm.time_travel_mod.present": "现代",
+    "itemGroup.time_travel_mod.main": "时间旅行",
+    "time_travel_mod.error.not_built.client": "时间机器没有被正确的搭建",
+    "time_travel_mod.error.not_built.server": "玩家使用的时间机器没有被搭建",
+    "time_travel_mod.error.hot_cores.client": "时间机器核心冷却好了！",
+    "time_travel_mod.error.hot_cores.server": "时间机器核心还在冷却",
+    "time_travel_mod.error.player_outside.client": "你必须进入时间机器",
+    "time_travel_mod.error.player_outside.server": "玩家没有进入时间机器",
+    "time_travel_mod.error.overloaded.client": "时间机器已超载！",
+    "time_travel_mod.error.overloaded.server": "玩家使用的时间机器超载了！",
+    "time_travel_mod.cheater_report": "服务器收到了时间旅行mod的提醒，它提醒 (%s) 玩家可能在作弊. 原因: %s. 我们建议你 %s 他.",
+    "text.autoconfig.time_travel_mod.option.common.enableUpdatePromos.@Tooltip": "如果禁用此功能，你将不会在进入世界时收到模组更新提醒",
+    "text.autoconfig.time_travel_mod.option.common.enableCheaterReports.@Tooltip": "如果禁用这个功能，在检测到作弊者时将不会通知op"
+}
