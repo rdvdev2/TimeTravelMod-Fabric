@@ -1,11 +1,9 @@
 package com.rdvdev2.timetravelmod.impl.client;
 
-import com.rdvdev2.timetravelmod.impl.Mod;
 import com.rdvdev2.timetravelmod.impl.ModBlocks;
 import com.rdvdev2.timetravelmod.impl.client.renderer.AnomalousAtemporalVoidBlockEntityRenderer;
 import com.rdvdev2.timetravelmod.impl.client.renderer.TemporalCauldronBlockEntityRenderer;
 import com.rdvdev2.timetravelmod.impl.common.block.GunpowderWireBlock;
-import de.guntram.mcmod.crowdintranslate.CrowdinTranslate;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.BlockEntityRendererRegistry;
@@ -20,8 +18,6 @@ public class ModClient implements ClientModInitializer {
         registerRenderers();
         registerBlockColorProviders();
         setBlockRenderLayers();
-
-        CrowdinTranslate.downloadTranslations("time-travel-mod", Mod.MODID);
     }
 
     private void registerRenderers() {

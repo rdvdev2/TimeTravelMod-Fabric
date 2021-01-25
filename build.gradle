@@ -27,10 +27,6 @@ repositories {
         name = "CottonMC"
         url = "https://server.bbkr.space/artifactory/libs-release"
     }
-    maven {
-        name = "Guntram"
-        url = "https://minecraft.guntram.de/maven/"
-    }
 }
 
 dependencies {
@@ -62,14 +58,12 @@ dependencies {
     }
     modImplementation "io.github.prospector:modmenu:${project.modmenu_version}"
     modImplementation "io.github.cottonmc:LibGui:${project.libgui_version}"
-    modImplementation "de.guntram.mcmod:crowdin-translate:${project.crowdin_translate_version}"
 
     // Jar-in-Jar dependencies
     include "curse.maven:DisableCustomWorldsAdvice-401978:${project.disable_custom_worlds_advice_fileid}"
     include "me.sargunvohra.mcmods:autoconfig1u:${project.autoconfig1u_version}"
     include "me.shedaniel.cloth:config-2:${project.cloth_config_2_version}"
     include "io.github.cottonmc:LibGui:${project.libgui_version}"
-    include "de.guntram.mcmod:crowdin-translate:${project.crowdin_translate_version}"
 
     // Dev runtime dependencies
     modRuntime "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
@@ -77,7 +71,6 @@ dependencies {
     modRuntime "io.github.prospector:modmenu:${project.modmenu_version}"
     modRuntime "me.shedaniel.cloth:config-2:${project.cloth_config_2_version}"
     modRuntime "io.github.cottonmc:LibGui:${project.libgui_version}"
-    modRuntime "de.guntram.mcmod:crowdin-translate:${project.crowdin_translate_version}"
 }
 
 processResources {
