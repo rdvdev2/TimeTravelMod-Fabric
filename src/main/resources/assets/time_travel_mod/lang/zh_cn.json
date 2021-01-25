@@ -1,5 +1,11 @@
 {
     "advancements.time_traveling.root.title": "时间旅行",
+    "advancements.time_traveling.root.description": "时间旅行的核心！",
+    "advancements.time_traveling.not_diamonds.title": "这里可没有钻石！",
+    "advancements.time_traveling.not_diamonds.description": "找到一个时间水晶矿石",
+    "advancements.time_traveling.time_machine.title": "磁通电容器... 正在传输...",
+    "advancements.time_traveling.time_machine.description": "进入一个时间机器",
+    "advancements.time_traveling.doesnt_look_good.title": "这看起来不怎么好",
     "gui.tm.time_travel_mod.old_west": "旧西部",
     "gui.tm.time_travel_mod.present": "现代",
     "itemGroup.time_travel_mod.main": "时间旅行",
