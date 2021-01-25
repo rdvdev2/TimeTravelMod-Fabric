@@ -94,6 +94,10 @@
     "tm.time_travel_mod.big_tier_1.name": "一级时间机器（大）",
     "tm_upgrade.time_travel_mod.tracker.name": "时间机器追踪器",
     "tm_upgrade.time_travel_mod.tracker.description": "当您使用时间机器时，此升级将配置其相邻的时间机器回收方块。当一个时间机器回收方块被配置时，它的中心会变成绿色，当用红石供电时，它会将配置好的时间机器返回到你的时间轴。如果你在穿越不同的时间线，你需要在每一站安装一个时间机器回收器。",
+    "text.autoconfig.time_travel_mod.option.common.enableUpdatePromos": "启用更新提醒",
     "text.autoconfig.time_travel_mod.option.common.enableUpdatePromos.@Tooltip": "如果禁用此功能，你将不会在进入世界时收到模组更新提醒",
-    "text.autoconfig.time_travel_mod.option.common.enableCheaterReports.@Tooltip": "如果禁用这个功能，在检测到作弊者时将不会通知op"
+    "text.autoconfig.time_travel_mod.option.common.enableCheaterReports": "启用作弊报告",
+    "text.autoconfig.time_travel_mod.option.common.enableCheaterReports.@Tooltip": "如果禁用这个功能，在检测到作弊者时将不会通知op",
+    "text.autoconfig.time_travel_mod.category.time_travel_mod_client": "客户端配置",
+    "text.autoconfig.time_travel_mod.category.time_travel_mod_common": "常用配置"
 }
