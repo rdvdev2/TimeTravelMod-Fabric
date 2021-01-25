@@ -55,6 +55,7 @@
     "time_travel_mod.error.incompatible_upgrades": "Данные улучшения не совместимы: %s",
     "time_travel_mod.cheater_report": "Запрос на перемещение во времени был получен на сервере, но игрок, который его отправил (%s), возможно, обманывает. Причина: %s. Мы предлагаем вам обратиться к %s him.",
     "time_travel_mod.ban": "[БАН!]",
+    "time_travel_mod.generic.comma": "%s, %s",
     "time_travel_mod.generic.and": "%s и %s",
     "tm.time_travel_mod.creative.description": "Данный предмет доступен только в творческом режиме. Он позволят путешествовать во времени без каких-либо ограничений.",
     "tm.time_travel_mod.creative.name": "Творческая машина времени",
