@@ -76,6 +76,8 @@
     "tm_upgrade.time_travel_mod.tracker.description": "이 업그레이드는 타임 머신을 사용할 때 인접한 타임 머신 호출기 블록을 구성합니다. 타임 머신 호출기 블록이 구성되면 중앙이 녹색으로 바뀌고, 레드스톤 전원이 켜지면 구성된 타임 머신이 시대로 돌아갑니다. 다양한 시대를 여행하는 경우 방문하는 모든 시대에 타임 머신 호출기를 설치해야 합니다.",
     "text.autoconfig.time_travel_mod.option.common.enableUpdatePromos": "업데이트 알림 활성화",
     "text.autoconfig.time_travel_mod.option.common.enableUpdatePromos.@Tooltip": "이 설정을 끈 경우 가입 시 모드 업데이트를 알리지 않습니다.",
+    "text.autoconfig.time_travel_mod.option.common.enableCheaterReports": "부정행위 보고 활성화",
+    "text.autoconfig.time_travel_mod.option.common.enableCheaterReports.@Tooltip": "이 기능이 비활성화된 경우 부정행위 가능성이 감지될 때 게임 마스터(ops)에 알리지 않습니다.",
     "text.autoconfig.time_travel_mod.category.time_travel_mod_client": "클라이언트 설정",
     "text.autoconfig.time_travel_mod.category.time_travel_mod_common": "일반 설정"
 }
