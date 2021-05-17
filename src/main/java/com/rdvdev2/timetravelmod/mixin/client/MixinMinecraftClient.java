@@ -21,7 +21,7 @@ public class MixinMinecraftClient {
     @Inject(method = "getMusicType", at = @At("HEAD"), cancellable = true)
     private void onGetMusicType(CallbackInfoReturnable<MusicSound> cir) {
         if (this.world == null || this.world.getRegistryKey() == null) return;
-        Optional<MusicSound> musicSound = TimelineMusicManager.INSTANCE.get(this.world.getRegistryKey());
+        Optional<MusicSound> musicSound = TimelineMusicManager.INSTANCE.getMusic(this.world.getRegistryKey());
         musicSound.ifPresent(cir::setReturnValue);
     }
 }

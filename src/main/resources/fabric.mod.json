@@ -18,13 +18,22 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.rdvdev2.timetravelmod.impl.Mod"
+      {
+        "adapter": "kotlin",
+        "value": "com.rdvdev2.timetravelmod.impl.Mod"
+      }
     ],
     "client": [
-      "com.rdvdev2.timetravelmod.impl.client.ModClient"
+      {
+        "adapter": "kotlin",
+        "value": "com.rdvdev2.timetravelmod.impl.client.ModClient"
+      }
     ],
     "modmenu": [
-      "com.rdvdev2.timetravelmod.integration.ModMenu"
+      {
+        "adapter": "kotlin",
+        "value": "com.rdvdev2.timetravelmod.integration.ModMenu"
+      }
     ]
   },
   "mixins": [
@@ -33,6 +42,7 @@
   "depends": {
     "minecraft": "~1.16.2",
     "fabricloader": "*",
+    "fabric-language-kotlin": "*",
 
     "fabric-api-base": "*",
     "fabric-biome-api-v1": "*",
