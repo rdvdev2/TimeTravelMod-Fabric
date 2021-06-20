@@ -87,7 +87,8 @@ tasks.getByName<ProcessResources>("processResources"){
     filesMatching("fabric.mod.json") {
         expand(
             mutableMapOf(
-                "version" to project.version
+                "version" to project.version,
+                "mc_version" to findProperty("minecraft_version")
             )
         )
     }

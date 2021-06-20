@@ -61,7 +61,7 @@ class TimeMachineStructure(
         val allPos = controllerPos + corePos + airPos + basicPos
         return Arrays.stream(allPos).parallel()
             .map { it.add(rootPos) }
-            .toArray { emptyArray<BlockPos>() }
+            .toArray { arrayOfNulls<BlockPos>(it) }
     }
 
     companion object {
@@ -76,7 +76,7 @@ class TimeMachineStructure(
             UPGRADE_STATE_CACHE[timeMachine] = Registry.BLOCK.stream().parallel()
                 .filter { it is TimeMachineUpgradeBlock && upgrades.contains(it.upgrade) }
                 .flatMap { it.stateManager.states.parallelStream() }
-                .toArray { emptyArray<BlockState>() }
+                .toArray { arrayOfNulls<BlockState>(it) }
             return generateUpgradeStates(timeMachine)
         }
 

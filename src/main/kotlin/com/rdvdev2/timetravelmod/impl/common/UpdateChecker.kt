@@ -7,9 +7,7 @@ import net.fabricmc.loader.api.SemanticVersion
 import net.fabricmc.loader.api.VersionParsingException
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.text.TranslatableText
-import java.io.BufferedReader
 import java.io.IOException
-import java.io.InputStreamReader
 import java.net.URL
 
 object UpdateChecker {
@@ -22,16 +20,13 @@ object UpdateChecker {
                 val currentVersion = SemanticVersion.parse(metadata.version.friendlyString)
                 var newVersion: SemanticVersion? = null
                 val url = metadata.getCustomValue("time_travel_mod:update_url").asString
-                val updateCheckConnection = URL(url).openConnection()
-                BufferedReader(InputStreamReader(updateCheckConnection.getInputStream())).use { reader ->
-                    var inputLine: String
-                    while (reader.readLine().also { inputLine = it } != null) {
-                        val data = inputLine.split(" ").toTypedArray()
-                        if (data[0] == "LATEST") newVersion = SemanticVersion.parse(data[1])
-                    }
+                val text = URL(url).readText()
+                for (inputLine in text.split("\n")) {
+                    val data = inputLine.split(" ").toTypedArray()
+                    if (data[0] == "LATEST") newVersion = SemanticVersion.parse(data[1])
                 }
-                if (newVersion != null && newVersion!! > currentVersion) {
-                    playerEntity.sendMessage(TranslatableText("chat.time_travel_mod.outdated", newVersion!!.friendlyString), false)
+                if (newVersion != null && newVersion > currentVersion) {
+                    playerEntity.sendMessage(TranslatableText("chat.time_travel_mod.outdated", newVersion.friendlyString), false)
                 }
             } catch (e: IOException) {
                 e.printStackTrace()
@@ -41,16 +36,4 @@ object UpdateChecker {
         }
     }
 
-    private class VersionDescriptor private constructor(val type: Type, val version: String) {
-
-        val semver: SemanticVersion? = try {
-            SemanticVersion.parse(version)
-        } catch (e: VersionParsingException) {
-            null
-        }
-
-        private enum class Type {
-            RELEASE, BETA, ALPHA, DEV
-        }
-    }
 }

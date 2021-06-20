@@ -65,6 +65,6 @@
   },
 
   "custom": {
-    "time_travel_mod:update_url": "https://raw.githubusercontent.com/rdvdev2/TimeTravelMod-Fabric/${version}/metadata/versions"
+    "time_travel_mod:update_url": "https://raw.githubusercontent.com/rdvdev2/TimeTravelMod-Fabric/${mc_version}/metadata/versions"
   }
 }
