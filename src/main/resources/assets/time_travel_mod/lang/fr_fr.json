@@ -21,6 +21,8 @@
     "gui.tm_engineer_book.how_to": "Guide de construction",
     "gui.tm_engineer_book.upgrades": "Améliorations de machine temporelle",
     "gui.tm_engineer_book.compatible_tms": "Machines temporelles compatibles",
+    "gui.time_travel_mod.time_machine.tier": "Niveau %s",
+    "gui.time_travel_mod.time_machine.go": "Go !",
     "item.time_travel_mod.controller_circuit": "Circuit de contrôle",
     "item.time_travel_mod.creative_time_machine": "Machine temporelle illimitée",
     "item.time_travel_mod.engineer_book": "Livre de l'ingénieur du temps",
