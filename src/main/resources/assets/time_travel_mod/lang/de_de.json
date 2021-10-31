@@ -1,6 +1,9 @@
 {
     "advancements.time_traveling.root.title": "Time Travel Mod",
     "advancements.time_traveling.root.description": "Der Kern der Modifikation",
+    "advancements.time_traveling.not_diamonds.title": "Das sind keine Diamanten!",
+    "advancements.time_traveling.not_diamonds.description": "Finde Zeitkristallerz",
+    "advancements.time_traveling.time_machine.title": "Flux-Kondensator... am fluxen...",
     "advancements.time_traveling.doesnt_look_good.title": "Das sieht nicht gut aus",
     "gui.tm.time_travel_mod.old_west": "Alter Westen",
     "gui.tm.time_travel_mod.present": "Gegenwart",
