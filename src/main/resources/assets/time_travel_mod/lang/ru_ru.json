@@ -13,8 +13,9 @@
     "death.attack.temporal_anomaly": "%s был уничтожен во время временной аномалии",
     "gui.tm.error": "Вы не можете отправиться в путешествие во временную линию, в которой вы уже находитесь, или отправиться в путешествие из ада или энда!",
     "gui.tm.time_travel_mod.old_west": "Старый Запад",
-    "gui.tm.time_travel_mod.present": "Настоящие",
+    "gui.tm.time_travel_mod.present": "Настоящее",
     "gui.tm_engineer_book.tms": "Машина времени",
+    "gui.tm_engineer_book.tms.symbol": "T",
     "gui.tm_engineer_book.tm_stats": "Максимальный уровень: %s | Время перезарядки двигателя: %s секунд",
     "gui.tm_engineer_book.how_to": "Инструкция по постройке",
     "gui.tm_engineer_book.upgrades": "Обновление Машины Времени",
@@ -63,6 +64,6 @@
     "tm.time_travel_mod.tier_1.description": "Самая простая машина времени, с помощью неё вы сможете путешествовать только на старый запад.",
     "tm.time_travel_mod.tier_1.name": "Машина времени первого уровня",
     "tm_upgrade.time_travel_mod.tracker.name": "Трекер машины времени",
-    "text.autoconfig.time_travel_mod.option.common.enableUpdatePromos.@Tooltip": "Если данный параметр отключен, то вы не будете получать уведомление об обновлениях мода",
+    "text.autoconfig.time_travel_mod.option.common.enableUpdatePromos.@Tooltip": "Если данный параметр отключен, то Вы не будете получать уведомление об обновлениях мода",
     "text.autoconfig.time_travel_mod.option.common.enableCheaterReports.@Tooltip": "Если выключено, операторы не будут получать уведомлений о возможных читерах"
 }
