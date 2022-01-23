@@ -21,6 +21,8 @@
     "gui.tm_engineer_book.how_to": "Guía de construcción",
     "gui.tm_engineer_book.upgrades": "Mejoras para Máquinas del Tiempo",
     "gui.tm_engineer_book.compatible_tms": "Máquinas del Tiempo Compatibles",
+    "gui.time_travel_mod.time_machine.tier": "Nivel %s",
+    "gui.time_travel_mod.time_machine.go": "¡Vamos!",
     "item.time_travel_mod.controller_circuit": "Circuito Controlador",
     "item.time_travel_mod.creative_time_machine": "Máquina del Tiempo (Creativo)",
     "item.time_travel_mod.engineer_book": "Libro del Ingeniero de Máquinas del Tiempo",
@@ -71,5 +73,6 @@
     "tm_upgrade.time_travel_mod.tracker.name": "Rastreador para Máquinas del Tiempo",
     "tm_upgrade.time_travel_mod.tracker.description": "Esta actualización configurará los Regresadores para Máquinas del Tiempo adyacentes cuando uses la Máquina del Tiempo. Cuando se configura un Regresador para Máquinas del Tiempo, su centro se vuelve verde y, cuando se activa con redstone, devuelve la Máquina del Tiempo que lo configuró a tu Línea Temporal. Si viajas a través de varias Líneas Temporales, deberás instalar un Regresador para Máquinas del Tiempo en cada Línea Temporal que visites.",
     "text.autoconfig.time_travel_mod.option.common.enableUpdatePromos.@Tooltip": "Si se desactiva, dejaras de ser notificado de las nuevas versiones del mod al unirte a un mundo",
-    "text.autoconfig.time_travel_mod.option.common.enableCheaterReports.@Tooltip": "Si esta opción está deshabilitada, los operadores (ops) no serán notificados cuando se detecte un posible tramposo"
+    "text.autoconfig.time_travel_mod.option.common.enableCheaterReports.@Tooltip": "Si esta opción está deshabilitada, los operadores (ops) no serán notificados cuando se detecte un posible tramposo",
+    "text.autoconfig.time_travel_mod.category.time_travel_mod_client": "Configuración del cliente"
 }
