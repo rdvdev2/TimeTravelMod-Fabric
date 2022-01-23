@@ -73,5 +73,6 @@
     "tm_upgrade.time_travel_mod.tracker.name": "Rastreador para Máquinas del Tiempo",
     "tm_upgrade.time_travel_mod.tracker.description": "Esta actualización configurará los Regresadores para Máquinas del Tiempo adyacentes cuando uses la Máquina del Tiempo. Cuando se configura un Regresador para Máquinas del Tiempo, su centro se vuelve verde y, cuando se activa con redstone, devuelve la Máquina del Tiempo que lo configuró a tu Línea Temporal. Si viajas a través de varias Líneas Temporales, deberás instalar un Regresador para Máquinas del Tiempo en cada Línea Temporal que visites.",
     "text.autoconfig.time_travel_mod.option.common.enableUpdatePromos.@Tooltip": "Si se desactiva, dejaras de ser notificado de las nuevas versiones del mod al unirte a un mundo",
-    "text.autoconfig.time_travel_mod.option.common.enableCheaterReports.@Tooltip": "Si esta opción está deshabilitada, los operadores (ops) no serán notificados cuando se detecte un posible tramposo"
+    "text.autoconfig.time_travel_mod.option.common.enableCheaterReports.@Tooltip": "Si esta opción está deshabilitada, los operadores (ops) no serán notificados cuando se detecte un posible tramposo",
+    "text.autoconfig.time_travel_mod.category.time_travel_mod_client": "Configuración del cliente"
 }
